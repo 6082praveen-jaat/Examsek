@@ -9,6 +9,11 @@ jobs:
       - name: Unzip Project
         run: unzip examseek-oct-15-2026-3-39-40-pm.zip -d project_folder
         
+      - name: Patch BuildConfig Error
+        run: |
+          find project_folder -name "*.kt" -exec sed -i 's/import com.example.BuildConfig//g' {} +
+          find project_folder -name "*.kt" -exec sed -i 's/BuildConfig\.GEMINI_API_KEY/""/g' {} +
+          
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
